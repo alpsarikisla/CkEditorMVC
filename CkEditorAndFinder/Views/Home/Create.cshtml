@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <textarea name="editor1"></textarea>
+}
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+@*<script src="~/CKFinderScripts/ckfinder.js"></script>*@
+<script type="text/javascript">
+    var editor = CKEDITOR.instances['editor1'];
+    if (editor) { editor.destroy(true); }
+    CKEDITOR.replace('editor1', {
+        enterMode: CKEDITOR.ENTER_BR,
+        filebrowserImageUploadUrl: '@Url.Action("UploadImage","Editor")',
+        filebrowserImageBrowseUrl: '/CKFinderScripts/ckfinder.html',
+    });
+    CKFinder.setupCKEditor(null, '@Url.Content("~/Scripts/ckFinder")');
+</script>
+
